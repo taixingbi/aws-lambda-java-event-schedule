@@ -1,2 +1,2 @@
 sam build
-sam local invoke
+sam local start-api

@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  scheduled event
+  api gateway event
 
 Parameters:
   BuildId:
@@ -9,30 +9,15 @@ Parameters:
     Default: unknown
 
 Resources:
-  LambdaDemo:
+  GetProducts:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
-      FunctionName:
-      Description: lambda scheduled event
       Handler: com.hello.Handler::handleRequest
       Runtime: java11
-      MemorySize: 512
-      Timeout: 60
-
       Events:
-        ScheduledEvent:
-          Type: Schedule
+        GetProductsAPI:
+          Type: Api
           Properties:
-            Schedule: 'rate(1 minute)'
-            Name: LambdaScheduleDemo
-            Description: test schedule
-            Enabled: true
-
-      Tags:
-        owner: taixingbi
-        projectname: Hello world
-        application: demo
-        exposure: private
-        compliance: non-sensitive
-        banner: s5a
+            Path: /api
+            Method: get
